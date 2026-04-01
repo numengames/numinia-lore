@@ -1,325 +1,180 @@
-# Sistema de Roles y Rangos de la Plataforma Numinia
+# Sistema de Rangos y Permisos — Numinia Digital Goods
 
-> Basado en el sistema de pensamiento sistémico del EEM Institute
-> y la estructura de roles del sistema Numinia.
-
----
-
-## La idea central
-
-En Numinia distinguimos tres cosas que NO son lo mismo:
-
-```
-RANGO          Lo que PUEDES hacer (permisos)
-GREMIO         Lo que SABES hacer (perfil/cualificación)
-ROL            Lo que HACES ahora (función dinámica)
-```
-
-Los **Rangos** dan permisos.
-Los **Gremios** describen tu conocimiento.
-Los **Roles** emergen de tus acciones.
+> Basado en el framework STSI del EEM Institute
+> y los documentos seminales de Numinia.
+> v2 — Abril 2026
 
 ---
 
-## 1. Rangos: La escalera de confianza
+## Principio fundamental
 
-Los rangos son acumulativos. Cada nivel incluye todo lo anterior.
-
-```
-                    ╔══════════════╗
-                    ║   ORACULO    ║  Co-fundador
-                    ║  Pythia, sol ║  Configura el sistema
-                    ╚══════╤═══════╝
-                           │
-                    ╔══════╧═══════╗
-                    ║   ARCONTE    ║  Administrador
-                    ║  Llave + ojo ║  Gestiona todo el catálogo
-                    ╚══════╤═══════╝
-                           │
-                    ╔══════╧═══════╗
-                    ║  VERNACULO   ║  Creador de confianza
-                    ║  Pluma + ↑   ║  Sube assets, ve stats
-                    ╚══════╤═══════╝
-                           │
-                    ╔══════╧═══════╗
-                    ║  PEREGRINO   ║  Aventurero comprometido
-                    ║  Brujula     ║  Season Pass, loot, puzzles
-                    ╚══════╤═══════╝
-                           │
-                    ╔══════╧═══════╗
-                    ║  CIUDADANO   ║  Miembro con wallet
-                    ║  Escudo      ║  Favoritos, perfil, Session Zero
-                    ╚══════╤═══════╝
-                           │
-                    ╔══════╧═══════╗
-                    ║    NOMADA    ║  Visitante libre
-                    ║  Viento      ║  Navega, descarga CC0
-                    ╚══════════════╝
-```
-
-### Tabla de permisos
+Los **rangos** dan permisos. Son **acumulativos**: cada rango hereda todos
+los permisos de los rangos inferiores.
 
 ```
-Accion                          NOM  CIU  PER  VER  ARC  ORA
-─────────────────────────────── ───  ───  ───  ───  ───  ───
-Navegar galeria                  x    x    x    x    x    x
-Descargar assets CC0             x    x    x    x    x    x
-Buscar y filtrar                 x    x    x    x    x    x
-                                 │
-Conectar wallet                  ·    x    x    x    x    x
-Guardar favoritos                ·    x    x    x    x    x
-Ver perfil propio                ·    x    x    x    x    x
-Ver NFTs propios                 ·    x    x    x    x    x
-Participar en Session Zero       ·    x    x    x    x    x
-                                 │
-Acceder a aventuras premium      ·    ·    x    x    x    x
-Reclamar loot exclusivo          ·    ·    x    x    x    x
-Participar en burn ritual        ·    ·    x    x    x    x
-Ver progreso de temporada        ·    ·    x    x    x    x
-                                 │
-Subir assets al catalogo         ·    ·    ·    x    x    x
-Editar metadatos propios         ·    ·    ·    x    x    x
-Ver stats de descargas propias   ·    ·    ·    x    x    x
-Acceso al LAP (panel creador)    ·    ·    ·    x    x    x
-                                 │
-Gestionar TODOS los assets       ·    ·    ·    ·    x    x
-Toggle visibilidad               ·    ·    ·    ·    x    x
-Sync a R2 / IPFS / Arweave      ·    ·    ·    ·    x    x
-Gestionar temporadas             ·    ·    ·    ·    x    x
-Ver stats globales               ·    ·    ·    ·    x    x
-Audit logs                       ·    ·    ·    ·    x    x
-                                 │
-Gestionar lista de admins        ·    ·    ·    ·    ·    x
-Configuracion del sistema        ·    ·    ·    ·    ·    x
-Decisiones arquitectonicas       ·    ·    ·    ·    ·    x
-```
-
-### Como se determina el rango
-
-El rango NO se asigna manualmente. Se **infiere** de lo que ya sabemos:
-
-```
-┌─────────────────────────────────────────────────────┐
-│                                                     │
-│   Sin sesion ──────────────────────────► NOMADA     │
-│                                                     │
-│   Wallet conectada ───────────────────► CIUDADANO   │
-│                                                     │
-│   Wallet + Season Pass ───────────────► PEREGRINO   │
-│                                                     │
-│   Wallet + assets subidos / creator ──► VERNACULO   │
-│                                                     │
-│   Wallet en ADMIN_WALLET_ADDRESSES ───► ARCONTE     │
-│                                                     │
-│   Wallet fundador ────────────────────► ORACULO     │
-│                                                     │
-└─────────────────────────────────────────────────────┘
+  ORACLE ──── 4 max. Administracion total.
+     │
+  ARCHON ──── Moderacion + gestion de contenido global.
+     │
+  VERNACULAR ─ Creacion y gestion de contenido propio.
+     │
+  PILGRIM ──── Ha comprado un digital good en Numinia.
+     │
+  CITIZEN ──── Puede editar su ficha y tiene loot.
+     │
+  NOMAD ────── Login con wallet/social. Solo lectura.
 ```
 
 ---
 
-## 2. Gremios y Facciones: Quien eres en Numinia
-
-Los gremios describen tu **perfil de conocimiento**.
-Las facciones describen tu **campo de desarrollo**.
-Se asignan al completar la **Session Zero**.
+## Matriz de permisos por rango
 
 ```
-          G R E M I O S (vertical: que sabes)
-          ═══════════════════════════════════
+Permiso                                  NOM  CIT  PIL  VER  ARC  ORA
+──────────────────────────────────────── ───  ───  ───  ───  ───  ───
 
-     Alquimistas       Exegetas       Procuradores     Centinelas
-     (crear)           (narrar)       (organizar)      (proteger)
-        │                 │                │                │
-    ┌───┴───┐         ┌───┴───┐        ┌───┴───┐       ┌───┴───┐
-    │       │         │       │        │       │       │       │
- Artesanos Ingenieros Cronistas Eruditos Juristas Sindicos Serafines Arcangeles
-    │   │     │   │     │   │    │   │    │   │    │   │    │   │     │    │
-    P   E     A   Au    L   B    T   H    LR  He   Te  Co   Ca  Gu    Sa  Gui
+LECTURA
+  Navegar galeria publica                 x    x    x    x    x    x
+  Descargar assets CC0                    x    x    x    x    x    x
+  Buscar y filtrar                        x    x    x    x    x    x
+  Ver su ficha de personaje (solo leer)   x    x    x    x    x    x
+  Ver su lista de favoritos               x    x    x    x    x    x
+  Ver colecciones NFT                     x    x    x    x    x    x
 
+IDENTIDAD
+  Editar su ficha de personaje            ·    x    x    x    x    x
+  Acceder al loot / inventario            ·    x    x    x    x    x
+  Participar en Session Zero              ·    x    x    x    x    x
 
+COMERCIO
+  Acceder a contenido premium comprado    ·    ·    x    x    x    x
+  Participar en burn ritual               ·    ·    x    x    x    x
+  Acceder a aventuras de temporada        ·    ·    x    x    x    x
 
-          F A C C I O N E S (horizontal: que campo)
-          ═════════════════════════════════════════
+CREACION (contenido propio)
+  Subir assets propios                    ·    ·    ·    x    x    x
+  Editar metadatos de sus assets          ·    ·    ·    x    x    x
+  Borrar sus propios assets               ·    ·    ·    x    x    x
+  Ver estadisticas de sus assets          ·    ·    ·    x    x    x
+  Acceder al LAP (panel de creador)       ·    ·    ·    x    x    x
 
-                    ┌───────────────────────────┐
-                    │    Neo-Atlantistas        │
-                    │    (Arte - itinerante)    │
-                    │    acompana a todas       │
-                    └─────────┬─────────────────┘
-                              │
-    ┌─────────────────────────┼─────────────────────────┐
-    │                         │                         │
-    ▼                         ▼                         ▼
- Hermeticos           Herederos de Eleusis        Circulo Estelar
- (Educacion)          ★ JUEGO (prototipo) ★       (Framework)
- periferico           siempre se empieza          periferico
-                      por jugar
-```
+ADMINISTRACION (contenido global)
+  Crear/editar/borrar CUALQUIER asset     ·    ·    ·    ·    x    x
+  Gestionar temporadas                    ·    ·    ·    ·    x    x
+  Ver estadisticas globales               ·    ·    ·    ·    x    x
+  Ver audit log                           ·    ·    ·    ·    x    x
+  Sync a R2 / IPFS / Arweave             ·    ·    ·    ·    x    x
 
-### Relacion Gremio x Faccion
+MODERACION
+  Banear / desbanear usuarios             ·    ·    ·    ·    x    x
+  Nombrar Vernaculars                     ·    ·    ·    ·    x    x
+  Gestionar rangos inferiores al suyo     ·    ·    ·    ·    x    x
 
-No son paralelos. Son **transversales**. Se cruzan:
-
-```
-                    Herederos     Circulo      Hermeticos
-                    de Eleusis    Estelar
-                    (Juego)       (Framework)  (Educacion)
-                    ───────────   ──────────   ──────────
- Alquimistas        Crea juegos   Construye    Ensena a
- (crear)            y mundos      sistemas     crear
-
- Exegetas           Escribe       Documenta    Investiga
- (narrar)           aventuras     procesos     y teoriza
-
- Procuradores       Gestiona      Organiza     Administra
- (organizar)        torneos       la empresa   la academia
-
- Centinelas         Modera        Asegura      Acompana
- (proteger)         partidas      calidad      el aprendizaje
+SISTEMA (Oracle only — max 4)
+  Nombrar / eliminar Archons              ·    ·    ·    ·    ·    x
+  Editar matriz de permisos               ·    ·    ·    ·    ·    x
+  Configuracion del sistema               ·    ·    ·    ·    ·    x
+  No puede ser baneado                    ·    ·    ·    ·    ·    x
 ```
 
 ---
 
-## 3. Roles: Lo que haces AHORA
+## Como se determina el rango
 
-Los roles son **dinamicos**. No se asignan. **Emergen de tus acciones**.
-Una misma persona puede activar distintos roles en distintos momentos.
-
-```
-  Pablo (Oraculo, Alquimista-Ingeniero, Herederos de Eleusis)
-  ═══════════════════════════════════════════════════════════
-
-  09:00  Sube un asset GLB ──────────────► Rol: ARTESANO
-  09:30  Revisa stats ──────────────────► Rol: CURADOR
-  10:00  Programa el frontend ──────────► Rol: INGENIERO
-  11:00  Escribe lore de temporada ─────► Rol: CRONISTA
-  14:00  Prioriza el backlog ───────────► Rol: GESTOR
-  16:00  Piensa en monetizacion ────────► Rol: ESTRATEGA
-  17:00  Responde en Discord ───────────► Rol: GUIA
-
-  Mismo ejecutor. Mismo rango (Oraculo). Mismo gremio.
-  SIETE roles distintos en un dia.
-```
-
-### Roles tipicos de la plataforma
+El rango se **infiere** automaticamente de las acciones del usuario:
 
 ```
-  ╭──────────────────────────────────────────────────────────╮
-  │  ACCION EN LA PLATAFORMA          ROL QUE SE ACTIVA      │
-  ├──────────────────────────────────────────────────────────┤
-  │                                                          │
-  │  Navega y descarga assets    ───►  Explorador             │
-  │  Guarda favoritos            ───►  Coleccionista          │
-  │  Juega una aventura          ───►  Aventurero             │
-  │  Sube un asset               ───►  Artesano               │
-  │  Remixa un asset CC0         ───►  Remixer                │
-  │  Verifica ownership NFT      ───►  Guardian               │
-  │  Construye un mundo .hyp     ───►  Arquitecto             │
-  │  Gestiona el catalogo        ───►  Curador                │
-  │  Administra la plataforma    ───►  Arconte (rol + rango)  │
-  │                                                          │
-  ╰──────────────────────────────────────────────────────────╯
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  Sin sesion ─────────────────────────────► (no accede)      │
+│                                                             │
+│  Login con wallet o cuenta social ───────► NOMADA           │
+│                                                             │
+│  + Completa Session Zero (gremio/faccion) ► CIUDADANO       │
+│                                                             │
+│  + Compra un digital good en Numinia ────► PEREGRINO        │
+│                                                             │
+│  + Promocion manual por Archon/Oracle ───► VERNACULO        │
+│                                                             │
+│  + Promocion manual por Oracle ──────────► ARCONTE          │
+│                                                             │
+│  + Definido en rank-overrides.json ──────► ORACULO (max 4)  │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Reglas de promocion y degradacion
+
+```
+  Quien promueve          A que rango        Quien degrada
+  ─────────────────────── ────────────────── ──────────────────
+  Sistema (automatico)    Nomada → Ciudadano Sistema (automatico)
+  Sistema (automatico)    Ciudadano → Pilgrim Sistema (automatico)
+  Archon o Oracle         → Vernacular       Archon o Oracle
+  Oracle                  → Archon           Oracle
+  rank-overrides.json     → Oracle (max 4)   Solo edicion manual
+```
+
+**Restricciones:**
+- Un Archon solo puede gestionar rangos **inferiores** al suyo
+  (puede promover/degradar hasta Vernacular, no puede tocar Archons ni Oracles)
+- Un Oracle puede gestionar **todos** los rangos excepto otros Oracles
+- Los Oracles solo se gestionan editando `rank-overrides.json`
+- Maximo 4 Oracles simultaneos
+- Los Oracles **no pueden ser baneados** (proteccion en 3 capas: storage, API, UI)
+
+---
+
+## Ficha de personaje por rango
+
+```
+  NOMADA     → Ficha pre-completada, SOLO LECTURA
+               (generada al hacer login, datos basicos del wallet/social)
+
+  CIUDADANO  → Ficha EDITABLE
+               (completa Session Zero → elige gremio + faccion)
+               Accede a loot / inventario
+
+  PEREGRINO  → Ficha editable + historial de compras
+               Loot premium desbloqueado
+
+  VERNACULO+ → Ficha editable + portfolio de assets subidos
 ```
 
 ---
 
-## 4. Como encaja todo junto
+## Deteccion tecnica de cada rango
 
-```
-  ┌─────────────────────────────────────────────────────────────┐
-  │                                                             │
-  │   EJECUTOR (persona fisica / wallet)                        │
-  │   Ejemplo: Pablo, 0x1234...                                 │
-  │                                                             │
-  │   ┌───────────────────────────────────────────────────────┐ │
-  │   │ RANGO: Oraculo                                        │ │
-  │   │ Que puede hacer: TODO                                 │ │
-  │   │ (permisos acumulativos)                               │ │
-  │   └───────────────────────────────────────────────────────┘ │
-  │                                                             │
-  │   ┌───────────────────────────────────────────────────────┐ │
-  │   │ PERFIL (Gremio + Faccion)                             │ │
-  │   │ Gremio: Alquimista > Ingeniero > Arquitecto           │ │
-  │   │ Faccion: Herederos de Eleusis (Juego)                 │ │
-  │   │ Que sabe hacer: disenar sistemas, programar, crear    │ │
-  │   └───────────────────────────────────────────────────────┘ │
-  │                                                             │
-  │   ┌───────────────────────────────────────────────────────┐ │
-  │   │ ROLES ACTIVOS (cambian segun la accion)               │ │
-  │   │ Ahora mismo: Ingeniero (programando el frontend)      │ │
-  │   │ Hace 1 hora: Curador (revisando assets)               │ │
-  │   │ Que esta haciendo: funcion concreta en este momento   │ │
-  │   └───────────────────────────────────────────────────────┘ │
-  │                                                             │
-  └─────────────────────────────────────────────────────────────┘
-```
+| Rango | Señal de deteccion | Almacenamiento |
+|---|---|---|
+| Nomad | `wallet_session` o `session` cookie presente | Cookie de sesion |
+| Citizen | Completó Session Zero | `data/characters/{address}.md` tiene gremio/faccion |
+| Pilgrim | Compró un digital good | `data/seasons/*-progress.json` o futuro `data/purchases/` |
+| Vernacular | Promocion manual | `data/system/rank-overrides.json` |
+| Archon | Promocion manual | `data/system/rank-overrides.json` |
+| Oracle | Bootstrap / edicion manual | `data/system/rank-overrides.json` (max 4 entries) |
 
 ---
 
-## 5. Resumen en una frase
+## Diferencias con v1 (lo que cambia)
 
-> **El Rango dice que PUEDES hacer.**
-> **El Gremio dice que SABES hacer.**
-> **La Faccion dice DONDE lo haces.**
-> **El Rol dice que ESTAS HACIENDO.**
-
-Los cuatro son necesarios. Ninguno sustituye al otro.
-
-```
-  RANGO ─── permisos de la plataforma (estatico, acumulativo)
-    │
-  GREMIO ── perfil de conocimiento (asignado en Session Zero)
-    │
-  FACCION ─ campo de desarrollo (asignado en Session Zero)
-    │
-  ROL ───── funcion activa (dinamico, emerge de la accion)
-```
+| Aspecto | v1 (actual) | v2 (este documento) |
+|---|---|---|
+| Nomad + wallet | Era citizen | Ahora es nomad (solo lectura) |
+| Nomad permisos | Podia editar ficha y favoritos | Solo lectura + favoritos |
+| Citizen trigger | Wallet conectada | Session Zero completada |
+| Pilgrim trigger | Season Pass | Cualquier compra de digital good |
+| Vernacular | Role 'creator' en GitHub | Promocion manual por Archon+ |
+| Archon nombra | No podia | Puede nombrar Vernaculars |
+| Archon scope | Todos los permisos admin | Solo rangos inferiores |
+| Oracle max | Sin limite | Maximo 4 |
 
 ---
 
-## 6. Flujo del usuario en la plataforma
+## Resumen en una frase
 
-```
-  Llega a numinia.store
-         │
-         ▼
-  ┌──────────────┐     Navega, descarga
-  │   NOMADA     │────────────────────────► usa la plataforma libre
-  └──────┬───────┘
-         │ conecta wallet
-         ▼
-  ┌──────────────┐     Favoritos, perfil
-  │  CIUDADANO   │────────────────────────► Session Zero disponible
-  └──────┬───────┘
-         │ completa Session Zero
-         │ (elige gremio + faccion)
-         ▼
-  ┌──────────────┐     Gremio asignado
-  │  CIUDADANO   │     Faccion elegida
-  │  + perfil    │     Prism Cells ganadas
-  └──────┬───────┘
-         │ compra Season Pass
-         ▼
-  ┌──────────────┐     Aventuras premium
-  │  PEREGRINO   │────────────────────────► puzzles, loot, burn ritual
-  └──────┬───────┘
-         │ sube assets / es invitado
-         ▼
-  ┌──────────────┐     Panel de creador
-  │  VERNACULO   │────────────────────────► upload, stats, LAP
-  └──────┬───────┘
-         │ wallet en whitelist
-         ▼
-  ┌──────────────┐     Gestion total
-  │   ARCONTE    │────────────────────────► admin del catalogo
-  └──────┬───────┘
-         │ co-fundador
-         ▼
-  ┌──────────────┐     Configuracion
-  │   ORACULO    │────────────────────────► decisiones de sistema
-  └──────────────┘
-```
+> **Nomada lee. Ciudadano edita su identidad. Peregrino compra.**
+> **Vernaculo crea. Arconte modera. Oraculo gobierna.**
 
 ---
 
@@ -327,4 +182,4 @@ Los cuatro son necesarios. Ninguno sustituye al otro.
 los documentos seminales de Numinia,
 y la estructura de roles del sistema Numinia.*
 
-*Numinia Digital Goods v0.10.0 — Abril 2026*
+*Numinia Digital Goods — Abril 2026*
