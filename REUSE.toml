@@ -1,0 +1,29 @@
+version = 1
+
+# Regime map per Numinia canon C-005 and decision D1 of the Codex Reader
+# mission (Oracle-signed 2026-08-17, numinia-nwos MIS-085): this repository
+# is PUBLIC, and every text in it is published under an EXPRESS reservation
+# of rights so the absence of an open license can never be mistaken for an
+# oversight (C-005 §1: silence does not declare).
+#
+# The LEGAL_DEBT.md and TRADEMARKS.md referenced by the reserved license
+# text live in numengames/numinia-web and numengames/numinia-nwos
+# respectively.
+
+# --- The seminal corpus, both lineages → reserved (C-005 §2) -------------
+[[annotations]]
+path = ["seminal/**", "seminal-legacy/**"]
+SPDX-FileCopyrightText = "2026 Numen Games S.L."
+SPDX-License-Identifier = "LicenseRef-Numen-AllRightsReserved"
+
+# --- Repo documentation → CC-BY-4.0 --------------------------------------
+[[annotations]]
+path = ["README.md"]
+SPDX-FileCopyrightText = "2026 Numen Games S.L."
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# --- Repo metadata → CC0-1.0 ---------------------------------------------
+[[annotations]]
+path = ["REUSE.toml"]
+SPDX-FileCopyrightText = "2026 Numen Games S.L."
+SPDX-License-Identifier = "CC0-1.0"
