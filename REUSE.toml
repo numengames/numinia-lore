@@ -10,9 +10,10 @@ version = 1
 # text live in numengames/numinia-web and numengames/numinia-nwos
 # respectively.
 
-# --- The seminal corpus, both lineages → reserved (C-005 §2) -------------
+# --- The seminal corpus (both lineages) and the codex edition matter
+# (legal note, acknowledgments, future glossary/sheet) → reserved (C-005 §2)
 [[annotations]]
-path = ["seminal/**", "seminal-legacy/**"]
+path = ["seminal/**", "seminal-legacy/**", "codex/**"]
 SPDX-FileCopyrightText = "2026 Numen Games S.L."
 SPDX-License-Identifier = "LicenseRef-Numen-AllRightsReserved"
 
