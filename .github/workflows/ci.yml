@@ -1,0 +1,18 @@
+# The lore repo's one gate (MIS-085 D1, Oracle-signed): every file must
+# declare its license — the corpus is public and all rights are reserved,
+# so the declaration IS the protection. reuse lint enforces REUSE 3.3.
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  reuse:
+    name: REUSE 3.3 (license declarations)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - name: reuse lint (pinned)
+        run: |
+          pipx install reuse==6.2.0
+          reuse lint
